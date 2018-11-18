@@ -9,6 +9,11 @@ const addTodo = createAction<TodoModel, string>(
     (text: string) => ({text, completed: false})
 );
 
+const addTodo2 = createAction<TodoModel, string>(
+    ADD_TODO,
+    (text: string) => ({text, completed: false})
+);
 export {
-    addTodo
+    addTodo,
+    addTodo2
 }

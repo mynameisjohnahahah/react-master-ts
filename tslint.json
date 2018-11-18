@@ -5,7 +5,8 @@
     "interface-name" : [true, "never-prefix"],
     "no-console": false,
     "member-access": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "object-literal-sort-keys": false
   },
   "linterOptions": {
     "exclude": [

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Home from '../App';
 import Login from './pages/Login'
+import StockAdjust from './pages/stock-adjust'
 
 class Routers extends React.Component {
      render() {
@@ -16,7 +17,7 @@ class Routers extends React.Component {
                         <Switch key={location.pathname}>
                             <Route location={location} exact={true} path="/" component={Login}/>
                             <Route location={location} path="/home" component={Home}/>
-                            {/*<Route component={NoMatch}/>*/}
+                            <Route location={location} path="/home/stock-adjust" component={StockAdjust}/>
                         </Switch>
                     )
                 }}/>
