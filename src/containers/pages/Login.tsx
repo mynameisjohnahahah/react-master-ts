@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {Form, Icon, Input, Button, Checkbox} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
-
+import { Login as LoginFun } from '../../server/index'
+import Cookies from 'js-cookie'
+import '../../style/login.less';
 const FormItem = Form.Item;
 
 interface UserFormProps extends FormComponentProps {
@@ -14,11 +16,15 @@ class Login extends React.Component <UserFormProps> {
 
     public handleSubmit = (e: any) => {
         e.preventDefault();
+        
         this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-                this.props.history.push('home');
-            }
+            LoginFun({
+                name: values.userName,
+                passwd: values.password
+            }).then((res:any) => {
+                console.log(res.data)
+                Cookies.set('token', res.data.token);
+            })
         });
     };
 
@@ -28,11 +34,8 @@ class Login extends React.Component <UserFormProps> {
         return (
             <div className='my-login'>
                 <div className='my-login-center'>
-                    <div className='my-login-title'>二白爬虫管理后台</div>
-                    <div className='my-login-tip'>最具影响力的设计规范</div>
                     <div className='my-login-method'>
                         <p>账户登录</p>
-                        <p>手机登录</p>
                     </div>
                     <div>
                         <Form onSubmit={this.handleSubmit} className="login-form">
