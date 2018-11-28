@@ -22,6 +22,7 @@ class Login extends React.Component <UserFormProps> {
                 name: values.userName,
                 passwd: values.password
             }).then((res:any) => {
+                return
                 console.log(res.data)
                 Cookies.set('token', res.data.token);
             })
