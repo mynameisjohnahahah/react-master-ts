@@ -36,9 +36,15 @@ class Login extends React.Component<IUserFormProps> {
                 name: values.userName,
                 passwd: values.password
             }).then((res:any) => {
+<<<<<<< HEAD
                 this.change(res.data.token)
                 Cookies.set('token', res.data.token)
                 this.props.history.push('/home')
+=======
+                return
+                console.log(res.data)
+                Cookies.set('token', res.data.token);
+>>>>>>> 1b95c3bbd5c2835188725eaf3d86d43b17590823
             })
         });
     };
