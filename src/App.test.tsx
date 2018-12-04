@@ -5,13 +5,13 @@ import { addTodo } from './containers/home/modules/actions';
 import { Button } from 'antd'
 import './App.css';
 
-interface AppProps {
+interface IAppProps {
   addTodo?: any;
   todos?: any;
   todos2?: any;
 }
 
-class App extends React.Component<AppProps> {
+class App extends React.Component<IAppProps> {
   constructor(props: any) {
     super(props)
   }
@@ -36,7 +36,7 @@ class App extends React.Component<AppProps> {
 
 const mapStateToProps = (state: any) => ({
   todos: state
-});
+})
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {

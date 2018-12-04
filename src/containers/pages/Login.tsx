@@ -1,20 +1,34 @@
-import * as React from 'react';
-import {Form, Icon, Input, Button, Checkbox} from 'antd';
-import {FormComponentProps} from 'antd/lib/form';
+import * as React from 'react'
+import { Dispatch } from 'redux'
+import { connect } from 'react-redux'
+import { getCookie } from '../home/modules/actions'
+import {Form, Icon, Input, Button, Checkbox} from 'antd'
+import {FormComponentProps} from 'antd/lib/form'
 import { Login as LoginFun } from '../../server/index'
 import Cookies from 'js-cookie'
-import '../../style/login.less';
-const FormItem = Form.Item;
+import '../../style/login.less'
+const FormItem = Form.Item
 
-interface UserFormProps extends FormComponentProps {
-    userName: string;
-    password: string;
-    history?: any;
+interface IUserFormProps extends FormComponentProps {
+    userName: string
+    password: string
+    history?: any
+    getCookie?: any
 }
 
-class Login extends React.Component <UserFormProps> {
+class Login extends React.Component<IUserFormProps> {
+    componentDidMount() {
+        this.loadData()
+    }
 
-    public handleSubmit = (e: any) => {
+    loadData () {
+        console.log(this)
+    }
+    change = (val:string) => {
+        this.props.getCookie(val)
+    }
+
+    handleSubmit = (e: any) => {
         e.preventDefault();
         
         this.props.form.validateFields((err, values) => {
@@ -22,14 +36,15 @@ class Login extends React.Component <UserFormProps> {
                 name: values.userName,
                 passwd: values.password
             }).then((res:any) => {
-                console.log(res.data)
-                Cookies.set('token', res.data.token);
+                this.change(res.data.token)
+                Cookies.set('token', res.data.token)
+                this.props.history.push('/home')
             })
         });
     };
 
     render() {
-        const {getFieldDecorator} = this.props.form;
+        const {getFieldDecorator} = this.props.form
 
         return (
             <div className='my-login'>
@@ -78,4 +93,16 @@ class Login extends React.Component <UserFormProps> {
     }
 }
 
-export default Form.create()(Login);
+const mapStateToProps = (state: any) => ({
+    todos: state,
+    token: state
+  });
+  
+  const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    return {
+        getCookie: (payload: string) => dispatch(getCookie(payload)),
+    }
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login));
+// export default Form.create()(Login);

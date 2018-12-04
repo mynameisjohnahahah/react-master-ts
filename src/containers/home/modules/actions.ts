@@ -1,19 +1,26 @@
-import {createAction} from 'redux-actions';
+import {createAction} from 'redux-actions'
 
-import {TodoModel} from './models';
+import {ITodoModel, IGetCookie} from './models'
 
-import {ADD_TODO} from './types';
+import {ADD_TODO, GET_COOKIE} from './types'
 
-const addTodo = createAction<TodoModel, string>(
+const addTodo = createAction<ITodoModel, string>(
     ADD_TODO,
     (text: string) => ({text, completed: false})
 );
 
-const addTodo2 = createAction<TodoModel, string>(
+const addTodo2 = createAction<ITodoModel, string>(
     ADD_TODO,
     (text: string) => ({text, completed: false})
 );
+
+const getCookie = createAction<IGetCookie, string>(
+    GET_COOKIE,
+    (text: string) => ({text})
+);
+
 export {
     addTodo,
-    addTodo2
+    addTodo2,
+    getCookie
 }

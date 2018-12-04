@@ -1,5 +1,6 @@
-import {TodoModel} from '../containers/home/modules/models';
+import {ITodoModel, IGetCookie} from '../containers/home/modules/models';
 
-export interface RootState {
-    todo: TodoModel;
+export interface IRootState {
+    todo: ITodoModel
+    token: IGetCookie
 }

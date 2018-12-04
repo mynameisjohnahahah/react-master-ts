@@ -1,11 +1,12 @@
 import axios from 'axios';
 import qs from 'qs';
-import md5 from 'md5';
+import Cookies from 'js-cookie'
 const CancelToken = axios.CancelToken;
 // 设置默认请求头
 axios.defaults.headers = {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'token': Cookies.get('token').slice(6)
 };
 // axios.defaults.baseURL = 'http://120.79.190.249:8010';
 // 请求超时的时间限制
@@ -59,9 +60,7 @@ axios.interceptors.response.use( (config: any) => {
     // 错误的请求结果处理，这里的代码根据后台的状态码来决定错误的输出信息
 })
 
-function post(url: any, data: any) {
-    data.passwd = md5(data.passwd)
-    const params =  qs.stringify(data)
+function post(url: string, params: any) {
     return new Promise((resolve, reject) => {
         axios.post(url, params).then((res: any) => {
             resolve(res); // 返回请求成功的数据 data

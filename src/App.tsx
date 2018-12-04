@@ -21,7 +21,6 @@ class App extends React.Component {
   constructor(props: any) {
     super(props)
   }
-
   render() {
       return (
         <Layout>
@@ -97,4 +96,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App
